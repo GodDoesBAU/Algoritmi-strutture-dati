@@ -41,6 +41,7 @@ class List_node{
 template< class T >
 class Linked_list : public Linear_list<T, List_node<T>*>{
  public:
+	
 	typedef typename Linear_list<T, List_node<T>*>::value_type value_type;
 	typedef typename Linear_list<T, List_node<T>*>::position position;
 
