@@ -22,6 +22,7 @@
 #define _LINKED_LIST_H
 
 #include "linear_list.h"
+#include <iostream>
 
 template<class T>
 class Linked_list;
@@ -33,10 +34,20 @@ class List_node{
 	T _value;
 	List_node<T> * _pPrev;
 	List_node<T> * _pNext;
+
+ public:
+ 	static void swap_node(List_node< T >*);
 };
 
+template <class T>
+void List_node<T>::swap_node(List_node<T> *toinvert)
+{
+    List_node< T > * temp;
 
-
+	temp = toinvert->_pNext;
+	toinvert->_pNext = toinvert->_pPrev;
+	toinvert->_pPrev = temp;
+}
 
 template< class T >
 class Linked_list : public Linear_list<T, List_node<T>*>{
@@ -63,9 +74,15 @@ class Linked_list : public Linear_list<T, List_node<T>*>{
 	bool end(position) const;
 	position next(position) const;
 	position previous(position) const;
-	void insert(const value_type &, position);
+	int length() const;
+    void insert(const value_type &, position);
+	void push_back(const value_type &);
+	void push_front(const value_type &);
 	void erase(position);
-	int size() const {
+	Linked_list< T >* reverse();
+    bool isPalindrome();
+
+    int size() const {
 		return _length;
 	};
 
@@ -74,6 +91,7 @@ class Linked_list : public Linear_list<T, List_node<T>*>{
 	bool operator==(const Linked_list<T> &) const; // tests two list for equality
 
  private:
+	
 	List_node<T> * _pHead;
 	int _length; // the length of the list
 };
@@ -84,12 +102,12 @@ Linked_list< T >::Linked_list() {
 	_pHead->_pNext = _pHead;
 	_pHead->_pPrev = _pHead;
 	_length = 0;
-}
+};
 
 
 template< class T >
 Linked_list< T >::Linked_list(const Linked_list<T>& L) {
-    //_length = L.size();
+    _length = L.size();
 
 	_pHead = new List_node<T>;
 	_pHead->_pNext = _pHead;
@@ -102,7 +120,7 @@ Linked_list< T >::Linked_list(const Linked_list<T>& L) {
 			p = L.previous(p);
 		}
 	}
-}
+};
 
 
 template< class T >
@@ -110,61 +128,71 @@ Linked_list< T >::~Linked_list(){
 	while(!empty())
 		erase(begin());
 	delete _pHead;
-}
+};
 
 template< class T >
 void Linked_list< T >::create(){
 	if (empty())
 			_length = 0;
-}
+};
 
 template< class T >
 bool Linked_list< T >::empty() const {
 	return(_pHead == _pHead->_pNext);
-}
+};
 
 template< class T >
 typename Linked_list< T >::position
 Linked_list< T >::begin() const {
 	return (_pHead->_pNext);
-}
+};
 
 template< class T >
 typename Linked_list< T >::position
 Linked_list< T >::last() const {
 	return (_pHead->_pPrev);
-}
+};
 
 
 template< class T >
 typename Linked_list< T >::position
 Linked_list< T >::next(position p) const {
 	return(p->_pNext);
-}
+};
 
 template< class T >
 typename Linked_list< T >::position Linked_list< T >::previous(position p) const {
 	if (p != _pHead)
 		return(p->_pPrev);
-}
+	else
+		return NULL;
+};
 
 template< class T >
 bool Linked_list< T >::end(position p) const {
 	return(p == _pHead);
-}
+};
 
 template< class T >
 typename Linked_list< T >::value_type
 Linked_list< T >::read(position p) const {
 	if (!end(p))
 		return(p->_value);
-}
+};
 
 template< class T >
 void Linked_list< T >::write(const value_type &a, position p) {
 	if (!end(p))
         p->_value = a;
-}
+	//else
+		//throw(new exception("Index out of bound"));
+
+};
+
+template< class T>
+int Linked_list< T >::length() const{
+    return _length;
+};
 
 template< class T >
 void Linked_list< T >::insert(const value_type &a, position p){
@@ -177,6 +205,27 @@ void Linked_list< T >::insert(const value_type &a, position p){
 	p->_pPrev = t;
 
 	_length++;
+};
+
+template <class T>
+void Linked_list<T>::push_back(const value_type &a){
+	position lastnode = this->last();
+	position to_insert = new List_node<T>;
+
+	to_insert->_value = a;
+
+	to_insert->_pPrev = lastnode;
+	lastnode->_pNext = to_insert;
+	to_insert->_pNext = _pHead;
+	_pHead->_pPrev = to_insert;
+
+	_length++;
+}
+
+template <class T>
+void Linked_list<T>::push_front(const value_type &a){
+	position p = this->begin();
+	this->insert(a, p);
 }
 
 template< class T >
@@ -187,16 +236,46 @@ void Linked_list< T >::erase(position p){
 		delete p;
 		_length--;
 	}
+};
+
+template< class T>
+Linked_list< T >* Linked_list< T >::reverse(){
+	if (!empty())
+	{
+		position current;
+		List_node<T>::swap_node(_pHead);
+		current = _pHead->_pNext;
+		do
+		{
+			List_node<T>::swap_node(current);
+			current = next(current);
+		} while (!end(current));
+	}
+	return this;
 }
 
+template< class T>
+bool Linked_list<T>::isPalindrome(){
+	Linked_list<T> clone;
+	clone = *this;
+	clone.reverse();
+	bool palindrome =(clone == *this) ? true : false;
 
+	return palindrome;
+} 
+
+//OPERATORI
 template<class T>
 Linked_list<T>& Linked_list<T>::operator=(const Linked_list<T>& L){
-	if (this != &L){
+    if (this != &L){
 	
 	    // deallocare tutta la lista this
 	
-	    ~linked_list();
+	    while (!empty())
+		{
+			erase(begin());
+		}
+		delete _pHead;
 	
 		//_length = L.size();
 
@@ -204,12 +283,9 @@ Linked_list<T>& Linked_list<T>::operator=(const Linked_list<T>& L){
 		_pHead->_pNext = _pHead;
 		_pHead->_pPrev = _pHead;
 
-        cout << L.empty();
-        cout << L.size();
 		if (!L.empty()){
             position p = L.last();
 			for (int i=0; i < L.size(); i++){
-				cout << i, L.read(p);
 				insert(L.read(p), begin());
 				p = L.previous(p);
 			}
@@ -233,8 +309,6 @@ bool Linked_list<T>::operator==(const Linked_list<T> &L) const{
 		pL = pL->_pNext;
 	}
 	return true;
-}
-
+};
 
 #endif // _LINKED_LIST_H
-

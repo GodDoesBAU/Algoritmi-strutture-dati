@@ -1,0 +1,33 @@
+{
+    "ClassName": "Linked_list",
+    "Description": "Classe di una lista collegata generica con template.",
+    "TemplateType": "T (tipo generico)",
+    "InheritsFrom": "Linear_list<T, List_node<T>*>",
+    "PublicMethods": {
+      "Linked_list()": "Costruttore predefinito per inizializzare una lista vuota.",
+      "Linked_list(int)": "Costruttore con dimensione iniziale specificata.",
+      "Linked_list(const Linked_list<T>&)": "Costruttore di copia per creare una nuova lista a partire da un'altra lista.",
+      "~Linked_list()": "Distruttore per deallocare la lista collegata e liberare la memoria.",
+  
+      "create()": "Inizializza una lista vuota.",
+      "empty()": "Restituisce true se la lista è vuota, altrimenti false.",
+      "read(position)": "Legge il valore nella posizione specificata.",
+      "write(value_type, position)": "Scrive un valore nella posizione specificata.",
+      "begin()": "Restituisce la posizione del primo elemento della lista.",
+      "last()": "Restituisce la posizione dell'ultimo elemento della lista.",
+      "end(position)": "Restituisce true se la posizione specificata è la fine della lista, altrimenti false.",
+      "next(position)": "Restituisce la posizione dell'elemento successivo a quello specificato.",
+      "previous(position)": "Restituisce la posizione dell'elemento precedente a quello specificato.",
+      "insert(value_type, position)": "Inserisce un valore nella posizione specificata.",
+      "erase(position)": "Cancella l'elemento nella posizione specificata.",
+      "size()": "Restituisce la lunghezza della lista.",
+  
+      "operator=": "Sovraccarico dell'operatore di assegnazione per copiare una lista in un'altra.",
+      "operator==": "Sovraccarico dell'operatore di uguaglianza per confrontare due liste."
+    },
+    "PrivateMembers": {
+      "_pHead": "Puntatore alla testa della lista.",
+      "_length": "La lunghezza della lista."
+    }
+  }
+  

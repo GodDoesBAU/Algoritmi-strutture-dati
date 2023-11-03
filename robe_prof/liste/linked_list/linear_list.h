@@ -45,7 +45,7 @@ class Linear_list{
 	virtual position previous(position) const = 0; // return the previous position
 	virtual void insert(const value_type &, position) = 0; // insert an element 
 	virtual void erase(position pos) = 0; // ersaes the element at position pos
-	
+
 	// funzioni di servizio
 	//friend ostream& operator<< <T,P>(ostream&, const Linear_list<T,P>&);
 
@@ -59,26 +59,28 @@ class Linear_list{
 		virtual void clear(); // erases all the elements
 	*/
 
+	/* sovraccarica <<. Attenzione se il tipo restituito da read non è primitivo, allora
+	* anche per questo tipo bisogna sovraccaricare l'operatore << 
+	*/
+	
 };
 
-/* sovraccarica <<. Attenzione se il tipo restituito da read non è primitivo, allora
- * anche per questo tipo bisogna sovraccaricare l'operatore << 
- */
 template< class T, class P >
-ostream& operator<<(ostream& os, const Linear_list<T,P> &l){
-	typename Linear_list<T,P>::position p;
-	p = l.begin();
-	os << "[";
-	while (!l.end(p)){
-		if (p != l.begin())
-			os << ", " << l.read(p);
-		else
-			os << l.read(p);
-		p = l.next(p);
+	ostream& operator<<(ostream& os, const Linear_list<T,P> &l){
+		typename Linear_list<T,P>::position p;
+		p = l.begin();
+		os << "[";
+		while (!l.end(p)){
+			if (p != l.begin())
+				os << ", " << l.read(p);
+			else
+				os << l.read(p);
+			p = l.next(p);
+		}
+		os << "]" << endl;
+		return os;
 	}
-	os << "]" << endl;
-	return os;
-}
+
 
 /*
 template< class T, class P >

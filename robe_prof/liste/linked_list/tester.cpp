@@ -26,10 +26,7 @@ using namespace std;
 
 int main(){
   Linked_list<double> list1, list2;
-  Linked_list<double>::position iter;
-
 	int x;
-
 	/* inserting three elements into the list list1 */
 	x = 1;
   list1.insert(x, list1.begin());
@@ -68,5 +65,36 @@ int main(){
 	else
 			cout << "list1 != list2" << endl;
 
-}
+	//Test reverse();
+		cout << "Reversing the list:" << endl;
+		list1.reverse();
+		list2.reverse();
 
+		cout << "List 1 : "; cout << list1; cout << endl;
+		cout << "List 2 : "; cout << list2; cout << endl;
+
+//CANCELLAZIONE TEST_SET
+/*NUOVO TEST_SET
+	LIST1 = [ 1 , 0 , 0 , 0, 1];
+*/
+	Linked_list<int> list;
+
+	x = 0;
+  	list.insert(x, list.begin());
+	list.insert(x, list.begin());
+	list.insert(x, list.begin());
+	x=1;
+	list.push_back(x);
+	list.insert(x, list.begin());	
+
+	cout << "NUOVO TEST SET"; cout << endl;
+	cout << list;
+	
+	//Test isPalindrome()
+		cout << "Testo se è palindroma: "; cout << endl;
+		bool flag = list.isPalindrome();
+		cout << flag << endl; 
+
+		cout << list;
+	return 1;
+}
