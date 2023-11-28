@@ -1,0 +1,22 @@
+#ifndef _SORTED_LINKED_LIST_H
+#define _SORTED_LINKED_LIST_H
+
+#include "linked_list.h"
+
+template< class T >
+class Sorted_L;
+
+template< class T >
+class Sorted_L : public Linked_list< T >{
+    public:
+        
+    private:
+        ordina
+
+        
+
+
+} 
+
+template<class T>
+Linked_list<T>& Linked_list<T>::operator=(const Linked_list<T>& L)

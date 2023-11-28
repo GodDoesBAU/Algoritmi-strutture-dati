@@ -13,6 +13,7 @@ int main(){
   C.inCoda(4);
   
   cout << " " << C.leggiCoda();
+  cout ><
   C.fuoriCoda();
   C.inCoda(4);
   cout << " " << C.leggiCoda();

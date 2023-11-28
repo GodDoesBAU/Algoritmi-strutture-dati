@@ -38,7 +38,7 @@ public:
     testa = 0;
     lung = 0;
   }
-
+  
   bool codaVuota(){
     return (lung == 0);
   }
@@ -62,6 +62,7 @@ public:
     }
   }
  
+  
  private:
   tipoelem *elementi;
   int testa, lung, maxlung;

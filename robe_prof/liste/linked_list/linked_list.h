@@ -37,7 +37,36 @@ class List_node{
 
  public:
  	static void swap_node(List_node< T >*);
+	bool operator<(const List_node<T> &);
+	bool operator>(const List_node<T> &);
+	bool operator<=(const List_node<T> &);
+	List_node<T>& operator=(const List_node<T> &);
 };
+
+
+template< class T>
+bool List_node<T>::operator<(const List_node<T> & To_compare){
+	bool greaterthan = ( this._pvalue < To_compare->_value)? 1 : 0;
+	return greaterthan;
+}
+
+template< class T>
+bool List_node<T>::operator>(const List_node<T> & To_compare){
+	bool lessthan = ( this._pvalue > To_compare->_value)? 1 : 0;
+	return lessthan;
+}
+
+template< class T>
+bool List_node<T>::operator<=(const List_node<T> & To_compare){
+	bool lessOrEqualthan = ( this._pvalue <= To_compare->_value)? 1 : 0;
+	return lessOrEqualthan;
+}
+
+template< class T>
+List_node<T>& List_node<T>::operator=(const List_node<T> & To_compare){
+	this->_value = To_compare._value;
+	return *this;
+}
 
 template <class T>
 void List_node<T>::swap_node(List_node<T> *toinvert)
@@ -81,6 +110,7 @@ class Linked_list : public Linear_list<T, List_node<T>*>{
 	void erase(position);
 	Linked_list< T >* reverse();
     bool isPalindrome();
+    bool swap_next(position p);
 
     int size() const {
 		return _length;
@@ -263,6 +293,16 @@ bool Linked_list<T>::isPalindrome(){
 
 	return palindrome;
 } 
+
+template< class T>
+bool Linked_list<T>::swap_next(position p){
+	if (!end(p))
+	{
+		T temp;
+		 
+	}
+	
+}
 
 //OPERATORI
 template<class T>
