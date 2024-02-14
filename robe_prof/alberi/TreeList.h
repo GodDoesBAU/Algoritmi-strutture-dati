@@ -21,18 +21,18 @@
 #ifndef TREELIST_H
 #define TREELIST_H
 
-#include "list_vector.h"
+#include "linked_list.h"
 #include "Tree.h"
 
 
 #define MAXNODES 100
 
 template<class I>
-class TreeList : public Tree<I, int> {
+class TreeList : public Tree<I, I> {
  public:
 
 	typedef I item;
-	typedef int node;
+	typedef I node;
 
 	// Costruttori e distruttore
 	TreeList(){
@@ -65,9 +65,9 @@ class TreeList : public Tree<I, int> {
 	struct Record {
 		item e;
 		bool used;
-		List_vector<int> childs;		
+		Linked_list<int> childs;		
 	};
-	typedef List_vector<int>::position position_list;
+	typedef Linked_list<int>::position position_list;
  
 	Record nodes[MAXNODES];
 	node _root;
@@ -98,7 +98,7 @@ void TreeList<I>::print() const{
 template <class I>
 void TreeList<I>::create(){
 	numNodes = 0;
-	for (int i=0; i< MAXNODES;i++){
+	for (int i=0; i < MAXNODES;i++){
 		nodes[i].used = false;
 		nodes[i].childs.create();
 	}

@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/adam/Documents/Github/Algoritmi & strutture dati/robe_prof/alberi",
-      "program": "/home/adam/Documents/Github/Algoritmi & strutture dati/robe_prof/alberi/build/Debug/outDebug",
+      "cwd": "/home/adam/Documents/Github/Algoritmi & strutture dati/robe_prof/binalberoc",
+      "program": "/home/adam/Documents/Github/Algoritmi & strutture dati/robe_prof/binalberoc/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

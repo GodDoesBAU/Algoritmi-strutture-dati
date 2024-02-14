@@ -53,6 +53,7 @@ class Bin_tree {
     virtual void ins_sx(Nodo) = 0;
     virtual void ins_dx(Nodo) = 0;
 
+    virtual int count_leaf(int) = 0;
     // funzioni di servizio da implementare qui
     //virtual void previsit(Nodo);
     //virtual void invisita(Nodo);
@@ -63,8 +64,7 @@ class Bin_tree {
 private:
     virtual void printSubTree(const Nodo) const;
 
-
-  };
+};
 
 template <class T, class N>
 void Bin_tree<T,N>::print() const{
@@ -93,9 +93,5 @@ std::ostream& operator<<(std::ostream& out, const Bin_tree<T, N>& t) {
     t.print();
     return out;
 }
-
-
-
-
 
 #endif /* _BINALBEROC_H_ */

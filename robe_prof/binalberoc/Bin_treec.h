@@ -68,7 +68,10 @@ class Bin_treec : public Bin_tree<T, int>{
     void ins_sx(Nodo);
     void ins_dx(Nodo);
 
+    int count_leaf(int);
+
   private:
+    void count_leaf_r(int, Nodo, int*);
     int MAXLUNG;
     Cella *spazio;
     int nNodi;
@@ -125,7 +128,7 @@ typename Bin_treec<T>::Nodo Bin_treec<T>::root() const
 }
 
 template <class T>
-typename     Bin_treec<T>::Nodo Bin_treec<T>::parent(Nodo n) const
+typename     Bin_treec<T>::Nodo Bin_treec<T>::parent(Bin_treec<T>::Nodo n) const
 {
   if (n != inizio)
     return (spazio[n].genitore);
@@ -134,7 +137,7 @@ typename     Bin_treec<T>::Nodo Bin_treec<T>::parent(Nodo n) const
 }
 
 template <class T>
-typename     Bin_treec<T>::Nodo Bin_treec<T>::sx(Nodo n) const
+typename     Bin_treec<T>::Nodo Bin_treec<T>::sx(Bin_treec<T>::Nodo n) const
 {
   if (!sx_empty(n))
     return (spazio[n].sinistro);
@@ -143,7 +146,7 @@ typename     Bin_treec<T>::Nodo Bin_treec<T>::sx(Nodo n) const
 };
 
 template <class T>
-typename     Bin_treec<T>::Nodo Bin_treec<T>::dx(Nodo n) const
+typename     Bin_treec<T>::Nodo Bin_treec<T>::dx(Bin_treec<T>::Nodo n) const
 {
   if (!dx_empty(n))
     return (spazio[n].destro);
@@ -267,4 +270,33 @@ void Bin_treec<T>::write(Nodo n, value_type a)
 	else
 		throw NullNode();
 }
+
+template<class T>
+int Bin_treec<T>::count_leaf(int level)
+{
+  int counter = 0;
+  int* p_counter = &counter;
+  count_leaf_r(level, root(), p_counter);
+  return counter;
+}
+
+template<class T>
+void Bin_treec<T>::count_leaf_r(int level, Bin_treec<T>::Nodo n, int* counter)
+{
+  int flag_sx = sx_empty(n),
+      flag_dx = dx_empty(n);
+
+  if(flag_sx && flag_dx && level == 1)
+    *counter = *counter + 1;
+  else{
+    if (level > 1)
+    {
+      if (!flag_sx)
+        count_leaf_r(level - 1, sx(n), counter);
+      if (!flag_dx)
+        count_leaf_r(level - 1, dx(n), counter);
+    }
+  }
+}
+
 #endif /* _Bin_treecC_H_ */

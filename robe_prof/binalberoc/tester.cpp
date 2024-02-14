@@ -39,6 +39,7 @@ int main(){
 	T.ins_dx(n1);
 	T.write(T.dx(n1), 4);
 	T.print();
-	cout << T;
+
+	printf("il numero di nodi al livello 2 due è %d",  T.count_leaf(3));
 }
 
